@@ -1,0 +1,29 @@
+.menuDiv {
+    width: 25%;
+    height: 100%;
+    border: 2px solid black;
+}
+.list{
+    height:auto !important;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:20px;
+    font-size:30px;
+    padding-left: 40px;
+    padding-top: 70px;
+    list-style: none;
+}
+.list li{
+    font-weight: 700;
+    color:gray;
+    cursor: pointer;
+
+}
+@media screen and (max-width: 768px) {
+    .menuDiv {
+        display: none;
+    }
+    
+}
