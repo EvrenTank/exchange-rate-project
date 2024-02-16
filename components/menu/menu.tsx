@@ -1,5 +1,6 @@
 "use client";
 import styles from "../../styles/menu/menu.module.css";
+import Icon from "./icon";
 import { useState } from "react";
 const Menu = () => {
  
@@ -7,6 +8,7 @@ const Menu = () => {
 
     return (
         <div className={styles.menuDiv}>
+            <Icon></Icon>
             <ul className={styles.list}>
                 <li style={{
                     color: selectedpage == "Ana Sayfa" ? "blue" : "black"
