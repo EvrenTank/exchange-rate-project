@@ -1,0 +1,53 @@
+.smallScreenMenuDiv {
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 1px 5px gray ;
+    background-color: rgba(244,244,244,0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.list{
+    height:auto !important;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    list-style: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}   
+.list:hover{
+}
+.list li{
+    font-weight: 500;
+    color:yellow;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    font-size: larger;
+    align-items: center;
+    border-radius: 50%;
+}
+.list li:hover {
+    background-color: rgba(240,240,240,1.0);
+    color:orange;
+}
+.materialsIcon{
+    font-size: 50px;
+}
+
+
+@media screen and (min-width: 800px) {
+    .smallScreenMenuDiv {
+        display:none;
+    }
+}

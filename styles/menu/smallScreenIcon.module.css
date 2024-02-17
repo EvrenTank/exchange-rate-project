@@ -6,8 +6,8 @@
     gap:10px;
     padding-top: 50px;
     width: 100%;
-    margin-left: 17px;
-    margin-right: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 .div2{
     display: flex;
@@ -37,9 +37,3 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-@media screen and (min-width: 800px) {
-.menuIcon {
-    display: none;
-}
-    
-} 

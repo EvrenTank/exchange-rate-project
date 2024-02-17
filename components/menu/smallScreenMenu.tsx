@@ -1,20 +1,20 @@
 "use client";
-import styles from "../../styles/menu/menu.module.css";
-import Icon from "./icon";
+import styles from "../../styles/menu/smallScreenMenu.module.css";
+import SmallScreenIcon from "./smallScreenIcon";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import HelpCenterRoundedIcon from '@mui/icons-material/HelpCenterRounded';
 import { useState } from "react";
-const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
+const SmallScreenMenu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
  
 
     return (
-        <div className={styles.menuDiv} 
+        <div className={styles.smallScreenMenuDiv}
         style={{
-            display: open ? "none" : "flex"
-        }} >
+            display: open ? "flex" : "none"
+        }}>
 
-            <Icon open={open} setOpen ={setOpen} ></Icon>
+            <SmallScreenIcon open={open} setOpen ={setOpen} ></SmallScreenIcon>
             <ul className={styles.list}>
                 <li style={{
                     color: selectedpage == "Ana Sayfa" ? "orange" : "rgb(200,200,200)"
@@ -22,30 +22,29 @@ const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
                 onClick={()=>{
                     setSelectedpage("Ana Sayfa");
                 }}
-                title={!open ? "Ana Sayfa" : ""}
-                ><HomeRoundedIcon className={styles.materialsIcon} />
-                <p >Ana Sayfa</p></li>
+                title="Ana Sayfa"
+                ><HomeRoundedIcon className={styles.materialsIcon}/>
+                </li>
                 <li style={{
                     color: selectedpage == "Dönüştür" ? "orange" : "rgb(200,200,200)"
                 }} 
                 onClick={()=>{
                     setSelectedpage("Dönüştür");
                 }}
-                title={!open ? "Dönüştür" : ""}
-                >
-                <CalculateIcon className={styles.materialsIcon}/><p>Dönüştür</p></li>
+                title="Dönüştür"                >
+                <CalculateIcon className={styles.materialsIcon} /></li>
                 <li style={{
                     color: selectedpage == "Hakkında" ? "orange" : "rgb(200,200,200)"
                 }} 
                 onClick={()=>{setSelectedpage("Hakkında");}}
-                title={!open ? "Hakkında" : ""}
+                title="Hakkında"
                 >
-                <HelpCenterRoundedIcon className={styles.materialsIcon}/>
-                <p>Hakkında</p></li>
+                <HelpCenterRoundedIcon className={styles.materialsIcon} />
+              </li>
             </ul>
 
         </div>
     )
 }
 
-export default Menu;
+export default SmallScreenMenu;
