@@ -1,10 +1,11 @@
 .container {
     width: 80%;
-    height: 100%;
+    height: 100vh;
     position: fixed;
     right: 0;
     top:0;
     background-color: bisque;
+    overflow-y: scroll;
 }
 .priceContainer {
     width: 100%;
@@ -14,6 +15,37 @@
     align-content: space-between;
     flex-wrap: wrap;
     gap:25px 25px;
-    padding-top: 40px;
-    
+    padding-top: 80px;
+    position:relative;
+}
+.dateContainer {
+    position: absolute;
+    width:100%;
+    height: 50px;
+    top:0;
+    left:0;
+    border:2px solid white;
+    padding-left: 30px;
+    display: flex;
+    align-items: flex-end;
+    font-weight: 600;
+
+}
+.calendarandchartContainer {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.calendarContainer{
+    width: 450px;
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+.chartContainer {
+    width: 450px;
+    display: flex;
+    align-items: center;
 }

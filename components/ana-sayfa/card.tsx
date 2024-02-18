@@ -22,7 +22,7 @@ const Card = ({exchangeName,value}:{
                     <p>{`${exchangeName}/lira`}</p>
                 </div>
                 <div className={styles.rateDiv}>
-                    <CurrencyLiraRoundedIcon className={styles.liraIcon}/><p>{value}</p>
+                    <CurrencyLiraRoundedIcon className={styles.liraIcon}/><p>{(1/value).toFixed(4)}</p>
                 </div>
             </div>
             <div className={styles.subdiv2}>
