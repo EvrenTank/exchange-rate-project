@@ -4,6 +4,7 @@ import SmallScreenIcon from "./smallScreenIcon";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import HelpCenterRoundedIcon from '@mui/icons-material/HelpCenterRounded';
+import Link from "next/link";
 import { useState } from "react";
 const SmallScreenMenu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
  
@@ -16,7 +17,7 @@ const SmallScreenMenu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
 
             <SmallScreenIcon open={open} setOpen ={setOpen} ></SmallScreenIcon>
             <ul className={styles.list}>
-                <li style={{
+                <Link href="/" ><li style={{
                     color: selectedpage == "Ana Sayfa" ? "orange" : "rgb(200,200,200)"
                 }} 
                 onClick={()=>{
@@ -24,7 +25,8 @@ const SmallScreenMenu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
                 }}
                 title="Ana Sayfa"
                 ><HomeRoundedIcon className={styles.materialsIcon}/>
-                </li>
+                </li></Link>
+                <Link href="/converter">
                 <li style={{
                     color: selectedpage == "Dönüştür" ? "orange" : "rgb(200,200,200)"
                 }} 
@@ -32,7 +34,7 @@ const SmallScreenMenu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
                     setSelectedpage("Dönüştür");
                 }}
                 title="Dönüştür"                >
-                <CalculateIcon className={styles.materialsIcon} /></li>
+                <CalculateIcon className={styles.materialsIcon} /></li></Link>
                 <li style={{
                     color: selectedpage == "Hakkında" ? "orange" : "rgb(200,200,200)"
                 }} 

@@ -4,6 +4,7 @@ import Icon from "./icon";
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import HelpCenterRoundedIcon from '@mui/icons-material/HelpCenterRounded';
+import Link from "next/link";
 import { useState } from "react";
 const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
  
@@ -16,7 +17,9 @@ const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
 
             <Icon open={open} setOpen ={setOpen} ></Icon>
             <ul className={styles.list}>
-                <li style={{
+                <Link href = "/" style={{
+                    width:"100%",
+                }} ><li style={{
                     color: selectedpage == "Ana Sayfa" ? "orange" : "rgb(200,200,200)"
                 }} 
                 onClick={()=>{
@@ -24,7 +27,11 @@ const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
                 }}
                 title={!open ? "Ana Sayfa" : ""}
                 ><HomeRoundedIcon className={styles.materialsIcon} />
-                <p >Ana Sayfa</p></li>
+                <p >Ana Sayfa</p></li></Link>
+                <Link href="/converter" style={{
+                    width:"100%",
+                }}
+                >
                 <li style={{
                     color: selectedpage == "Dönüştür" ? "orange" : "rgb(200,200,200)"
                 }} 
@@ -33,7 +40,7 @@ const Menu = ({open,setOpen,selectedpage,setSelectedpage}:any) => {
                 }}
                 title={!open ? "Dönüştür" : ""}
                 >
-                <CalculateIcon className={styles.materialsIcon}/><p>Dönüştür</p></li>
+                <CalculateIcon className={styles.materialsIcon}/><p>Dönüştür</p></li></Link>
                 <li style={{
                     color: selectedpage == "Hakkında" ? "orange" : "rgb(200,200,200)"
                 }} 

@@ -2,10 +2,9 @@
 import SmallScreenMenu from "../menu/smallScreenMenu";
 import Menu from "../menu/menu";
 import { useState,useEffect } from "react";
-const MainComponent = () => {
+const MainComponent = ({selectedpage,setSelectedpage}:any) => {
 
     const [open,setOpen] = useState<boolean>(false);
-    const [selectedpage,setSelectedpage] = useState<string>("Ana Sayfa");
 
     const handleResize =  () => {
         var width = window.innerWidth;

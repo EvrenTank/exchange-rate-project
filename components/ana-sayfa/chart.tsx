@@ -24,7 +24,10 @@ const Chart = ({apiKey}:any) => {
     const handleChange = (event: SelectChangeEvent) => {
       setDoviz(event.target.value as string);
       console.log("Döviz:",event.target.value);
+      const calculatedDates = calculateDates(dayjs(),dayjs().subtract(1,range),range);
+      getDataForDates(calculatedDates,event.target.value);
     };
+
     const handleRange = (
         event: React.MouseEvent<HTMLElement>,
         newRange: string | any,
@@ -33,7 +36,7 @@ const Chart = ({apiKey}:any) => {
         setRange(newRange);
         setStartdate(dayjs().subtract(1,range));
         const calculatedDates = calculateDates(dayjs(),dayjs().subtract(1,newRange),newRange);
-        getDataForDates(calculatedDates);
+        getDataForDates(calculatedDates,doviz);
       };
     const calculateDates = (start:dayjs.Dayjs, end: dayjs.Dayjs, range:string | any) => {
         const dates : dayjs.Dayjs[] = [];
@@ -43,57 +46,81 @@ const Chart = ({apiKey}:any) => {
         console.log("end",end);
 
         while(end <= currentDate){
-            console.log("çalışmıyor mu yoksa?")
+            //console.log("çalışmıyor mu yoksa?")
             dates.push(end);
             if(range == "week"){
                 end = end.add(1,'day');
-                console.log("range",range);
-                console.log("week");
+
 
             }
             else if(range == 'month'){
                 end = end.add(2,'day');
-                console.log("range",range);
-                console.log("month");
+
 
             }
             else {
                 end = end.add(1,'month');
-                console.log("range",range);
-                console.log("year");
- 
+                
             }
         } 
         return dates;
     }
-   const getDataForDates = (dates: dayjs.Dayjs[]) => {
-    console.log("çalışıyor");
-    console.log("dates",dates);
-    const xdatas:any = [];
-    const ydatas:any = [];
-    dates.forEach((date:any) => {
-        xdatas.push(date);
-        console.log("xdata",date);
-        const url = `https://v6.exchangerate-api.com/v6/${apiKey}/history/TRY/${date.year()}/${date.month() + 1}/${date.date()}`;
-        axios.get(url)
-        .then((response:any) => {
-            ydatas.push(response.data.conversion_rates[doviz]);
-            console.log("ydata=",response.data.conversion_rates[doviz]);
-        })
-        .catch((error:any) => {
-            console.error(`Error fetching data for ${date}:`, error);
-        })
-    });
-    setX(xdatas);
-    setY(ydatas);
-   }
+
+    const getDataForDates = (dates: dayjs.Dayjs[], doviz:string) => {
+      console.log("çalışıyor");
+      console.log("dates", dates);
+      console.log("range", range);
+      console.log("doviz", doviz);
+      const xdatas:any = [];
+      const ydatas:any = [];
+  
+      // Promise dizisi oluştur
+      const requests = dates.map((date:any) => {
+          xdatas.push(date);
+          const url = `https://v6.exchangerate-api.com/v6/${apiKey}/history/TRY/${date.year()}/${date.month() + 1}/${date.date()}`;
+          return axios.get(url)
+              .then((response:any) => {
+                  return response.data.conversion_rates[doviz];
+              })
+              .catch((error:any) => {
+                  console.error(`Error fetching data for ${date}:`, error);
+                  // Hata durumunda boş bir değer döndür
+                  return null;
+              });
+      });
+  
+      // Tüm Promise'leri bekleyerek işlemleri gerçekleştir
+      Promise.all(requests)
+          .then((results:any) => {
+              // Tüm Promise'ler tamamlandığında çalışacak olan kısım
+              // results dizisinde her bir API çağrısının sonucu yer alır
+              results.forEach((result:any) => {
+                  // result null olabilir, bu durumda ydatas'a null eklemeyin
+                  if (result !== null) {
+                      ydatas.push(1/result);
+                  }
+              });
+              // Tüm veriler işlendikten sonra setX ve setY fonksiyonlarını çağır
+              setX(xdatas);
+              setY(ydatas);
+          })
+          .catch((error:any) => {
+              console.error('Error processing requests:', error);
+          });
+  }
+
    useEffect(()=>{
     console.log("x",x);
     console.log("y",y);
-   },[x,y]);
+   },[x,y,range,doviz]);
+   useEffect(()=>{
+    const calculatedDates = calculateDates(dayjs(),dayjs().subtract(1,range),range);
+        getDataForDates(calculatedDates,doviz);
+   },[]);
 
     return(
-        <div>
+
+      <div>
       <div className={styles.containerDiv} >  
         <div className={styles.currencyDiv} >        
         <FormControl size="small">
@@ -125,7 +152,9 @@ const Chart = ({apiKey}:any) => {
       </ToggleButtonGroup></div>
       </div>
 
-    <LineChart xAxis={[{ scaleType:'time', data: x }]}
+    <LineChart
+    key={`${y.toString()}-${range}-${doviz}`} 
+    xAxis={[{data:x,scaleType:'time'}]}
     series={[
       {
         data: y,

@@ -53,6 +53,9 @@ const AnaSayfa = () => {
 
     return (
         <div className={styles.container} >
+            <div className={styles.pagenameContainer} >
+                <h2>Ana Sayfa</h2>
+            </div>
             <div className={styles.priceContainer}>
                 <div className={styles.dateContainer}>{date?.date()}/{date?.month()}/{date?.year()} tarihine ait döviz kurları:</div>
                 <Card exchangeName='dolar' value={exchangerates.USD} ></Card>
