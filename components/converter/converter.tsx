@@ -48,8 +48,7 @@ const Converter = () => {
         const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/TRY`;
         axios.get(url)
         .then((response) => {
-            console.log("response",response);
-            console.log("response.data.conversion_rates",response.data.conversion_rates.USD);
+            //console.log("response.data.conversion_rates",response.data.conversion_rates.USD);
             setExchangerates(response.data.conversion_rates);
         });
     }
@@ -58,48 +57,31 @@ const Converter = () => {
       
         const baseCurrency = doviz.base;
         const convertedCurrency = doviz.converted;
-        console.log("baseCurrency", baseCurrency);
-        console.log("convertedCurrency", convertedCurrency);
         var baseValue=1;//tl olarak kalırsa oran zaten 1 olacagi icin boyle
         var convertedValue=1; // tl oranları
         if(baseCurrency == "USD"){
             baseValue = exchangerates.USD;
-            console.log("çalala");
         }
         if(baseCurrency == "EUR"){
             baseValue = exchangerates.EUR;
-            console.log("çalala");
-
         }
         if(baseCurrency == "GBP"){
             baseValue = exchangerates.GBP;
-            console.log("çalala");
-
         }
         if(baseCurrency == "JPY"){
-            baseValue = exchangerates.JPY;
-            console.log("çalala");
-            
+            baseValue = exchangerates.JPY;            
         }
         if(convertedCurrency == "USD"){
             convertedValue = exchangerates.USD;
-            console.log("çalala");
-
         }
         if(convertedCurrency == "EUR"){
             convertedValue = exchangerates.EUR;
-            console.log("çalala");
-
         }
         if(convertedCurrency == "GBP"){
             convertedValue = exchangerates.GBP;
-            console.log("çalala");
-
         }
         if(convertedCurrency == "JPY"){
             convertedValue = exchangerates.JPY;
-            console.log("çalala");
-
         }
 
         /*const USD = exchangerates.USD; //tl'ye gore oranlari
@@ -112,28 +94,16 @@ const Converter = () => {
         var finalValue:number=0;
 
         if (baseCurrency == convertedCurrency){
-            console.log("burası çalıştı")
             finalValue = inputValue;
         }
         else if(baseCurrency !== convertedCurrency && baseCurrency == "TRY"){
             finalValue = inputValue * convertedValue;
-            console.log("burası çalıştı");
-            console.log("convertedValue",convertedValue);
-            console.log("inputValue",inputValue);
-            console.log("finalValue",finalValue);
-
-        }
+         }
         else if(baseCurrency !== convertedCurrency && convertedCurrency == "TRY"){
             finalValue = inputValue / baseValue;
-            console.log("convertedValue",convertedValue);
-            console.log("inputValue",inputValue);
-            console.log("finalValue",finalValue);
-
         }
         else if(baseCurrency !== convertedCurrency && baseCurrency != "TRY" && convertedCurrency != "TRY") {
             finalValue = inputValue / baseValue * convertedValue;
-            console.log("burası çalıştı")
-
         }
         setCalculatedvalue(finalValue);
 
@@ -142,7 +112,6 @@ const Converter = () => {
     
     const handleChange = (event: SelectChangeEvent) => {
         (event.target.value as string);
-        console.log("base_doviz",event.target.value);
         setDoviz((doviz:any)=>{
             return {...doviz,base:event.target.value as string}
         });
@@ -150,7 +119,6 @@ const Converter = () => {
       };
       const handleChange2 = (event: SelectChangeEvent) => {
         (event.target.value as string);
-        console.log("base_doviz",event.target.value);
         setDoviz((doviz:any)=>{
             return {...doviz,converted:event.target.value as string}
         });

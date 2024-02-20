@@ -23,7 +23,6 @@ const Chart = ({apiKey}:any) => {
 
     const handleChange = (event: SelectChangeEvent) => {
       setDoviz(event.target.value as string);
-      console.log("Döviz:",event.target.value);
       const calculatedDates = calculateDates(dayjs(),dayjs().subtract(1,range),range);
       getDataForDates(calculatedDates,event.target.value);
     };
@@ -32,7 +31,6 @@ const Chart = ({apiKey}:any) => {
         event: React.MouseEvent<HTMLElement>,
         newRange: string | any,
       ) => {
-        console.log("çalışıyor");
         setRange(newRange);
         setStartdate(dayjs().subtract(1,range));
         const calculatedDates = calculateDates(dayjs(),dayjs().subtract(1,newRange),newRange);
@@ -40,37 +38,26 @@ const Chart = ({apiKey}:any) => {
       };
     const calculateDates = (start:dayjs.Dayjs, end: dayjs.Dayjs, range:string | any) => {
         const dates : dayjs.Dayjs[] = [];
-        console.log("çalışıyor");
         let currentDate = start;
-        console.log("currentDate",currentDate);
-        console.log("end",end);
 
         while(end <= currentDate){
             //console.log("çalışmıyor mu yoksa?")
             dates.push(end);
             if(range == "week"){
                 end = end.add(1,'day');
-
-
             }
             else if(range == 'month'){
                 end = end.add(2,'day');
-
-
             }
             else {
-                end = end.add(1,'month');
-                
+                end = end.add(1,'month'); 
             }
         } 
         return dates;
     }
 
     const getDataForDates = (dates: dayjs.Dayjs[], doviz:string) => {
-      console.log("çalışıyor");
-      console.log("dates", dates);
-      console.log("range", range);
-      console.log("doviz", doviz);
+
       const xdatas:any = [];
       const ydatas:any = [];
   

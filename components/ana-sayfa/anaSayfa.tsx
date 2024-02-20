@@ -41,8 +41,7 @@ const AnaSayfa = () => {
            url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/TRY`;}
         axios.get(url)
         .then( (response) => {
-            console.log("response",response);
-            console.log("response.data.conversion_rates",response.data.conversion_rates.USD);
+            //console.log("response.data.conversion_rates",response.data.conversion_rates.USD);
             setExchangerates(response.data.conversion_rates);
         });
     }
@@ -78,10 +77,6 @@ const AnaSayfa = () => {
                             onChange={(newValue)=> 
                             {
                             setDate(newValue);//burasi dogru sekilde update etmiyor olabilir.
-                            console.log("date=",newValue);
-                            console.log("date.day =",newValue?.date());
-                            console.log("date.month =",(newValue!.month()+1));
-                            console.log("date.year =",newValue?.year());
                             getData(newValue!.year(),newValue!.month()+1,newValue!.date());
                             }}/>
                     </LocalizationProvider>
